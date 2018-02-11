@@ -12,10 +12,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@Table(name = "GZ_OWNER")
 public class Owner implements Serializable {
 
     public enum Type {
@@ -113,7 +115,11 @@ public class Owner implements Serializable {
 
     @Override
     public String toString() {
-        return "Owner{" + "id=" + id + ", createdAt=" + createdAt + ", login=" + login + ", password=" + password + ", type=" + type + ", ownerState=" + ownerState + ", accounts=" + accounts + '}';
+        return "Owner{" + "id=" + id + ", createdAt=" + createdAt 
+                + ", login=" + login + ", password=" + password + ", type=" 
+                + type + ", ownerState=" + ownerState 
+                // + ", accounts=" + accounts 
+                + '}';
     }
     
     
