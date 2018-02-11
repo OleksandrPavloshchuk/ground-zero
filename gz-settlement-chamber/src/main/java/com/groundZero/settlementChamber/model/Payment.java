@@ -27,4 +27,51 @@ public class Payment implements Serializable {
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Account.class, cascade = {CascadeType.ALL})
     private Account destination;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Account getSource() {
+        return source;
+    }
+
+    public void setSource(Account source) {
+        this.source = source;
+    }
+
+    public Account getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Account destination) {
+        this.destination = destination;
+    }
+
+    @Override
+    public String toString() {
+        return "Payment{" + "id=" + id + ", amount=" + amount + ", createdAt=" + createdAt + ", source=" + source + ", destination=" + destination + '}';
+    }
+    
+    
 }

@@ -37,6 +37,67 @@ public class Account implements Serializable {
     
     @OneToMany(fetch = FetchType.LAZY, targetEntity = Payment.class, cascade = {CascadeType.ALL})
     private List<Payment> payments;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public BigDecimal getRest() {
+        return rest;
+    }
+
+    public void setRest(BigDecimal rest) {
+        this.rest = rest;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getLastChangedAt() {
+        return lastChangedAt;
+    }
+
+    public void setLastChangedAt(Date lastChangedAt) {
+        this.lastChangedAt = lastChangedAt;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" + "id=" + id + ", rest=" + rest + ", type=" + type + ", createdAt=" + createdAt + ", lastChangedAt=" + lastChangedAt + ", owner=" + owner + ", payments=" + payments + '}';
+    }
     
     
 }
