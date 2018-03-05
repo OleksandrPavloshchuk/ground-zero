@@ -15,9 +15,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "GZ_ACCOUNT")
+//@Entity
+//@Table(name = "GZ_ACCOUNT")
 public class Account implements Serializable {
     
     public enum Type {
@@ -25,6 +26,7 @@ public class Account implements Serializable {
     }
     
     @Id
+    @NotNull    
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     private BigDecimal rest;

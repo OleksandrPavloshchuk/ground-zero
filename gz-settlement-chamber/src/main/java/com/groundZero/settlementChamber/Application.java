@@ -1,7 +1,7 @@
 package com.groundZero.settlementChamber;
 
-import com.groundZero.settlementChamber.model.Owner;
-import com.groundZero.settlementChamber.repository.OwnerRepository;
+import com.groundZero.settlementChamber.model._Probe;
+import com.groundZero.settlementChamber.repository._ProbeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -18,12 +18,12 @@ public class Application {
     }
     
     @Bean
-    public CommandLineRunner demo(OwnerRepository ownerRepository) {
+    public CommandLineRunner demo(_ProbeRepository _probeRepo) {
         return args -> {
             for( int i=0; i<3; i++) {
-                ownerRepository.save( new Owner("user-" + i, "password-" + i));
+                _probeRepo.save( new _Probe("user-" + i));
             }
-            final Iterable<Owner> list = ownerRepository.findAll();
+            final Iterable<_Probe> list = _probeRepo.findAll();
             list.forEach( o -> {
                 LOG.info( "-> " + o );
             });

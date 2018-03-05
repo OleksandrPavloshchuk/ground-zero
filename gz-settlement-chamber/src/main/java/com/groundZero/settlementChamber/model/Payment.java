@@ -13,11 +13,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "GZ_PAYMENT")
+//@Entity
+//@Table(name = "GZ_PAYMENT")
 public class Payment implements Serializable {
     @Id
+    @NotNull    
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     private BigDecimal amount;
