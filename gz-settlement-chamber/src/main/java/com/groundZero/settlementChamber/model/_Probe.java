@@ -1,6 +1,7 @@
 package com.groundZero.settlementChamber.model;
 
 import java.io.Serializable;
+import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,7 +12,7 @@ import javax.validation.constraints.NotNull;
 public class _Probe implements Serializable {
 
     @Id
-    private Long id;
+    private String id;
     
     @NotNull
     private String name;
@@ -22,13 +23,14 @@ public class _Probe implements Serializable {
     
     public _Probe(String name) {
         this.name = name;
+        this.id = UUID.randomUUID().toString();
     }
     
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }    
 
