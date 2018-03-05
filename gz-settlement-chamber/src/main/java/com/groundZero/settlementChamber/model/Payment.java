@@ -2,35 +2,57 @@ package com.groundZero.settlementChamber.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
-import javax.persistence.CascadeType;
+import java.util.UUID;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
-//@Entity
-//@Table(name = "GZ_PAYMENT")
+@Entity
+@Table(name = "GZ_PAYMENT")
 public class Payment implements Serializable {
+
     @Id
-    @NotNull    
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Size(max = 64)
+//    @Column(length = 64, name = "ID")
     private String id;
+
+    @NotNull
+    @Digits(fraction = 2, integer = 10)
     private BigDecimal amount;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATED_AT")
     private Date createdAt;
-    
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Account.class, cascade = {CascadeType.ALL})
-    private Account source;
-    
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Account.class, cascade = {CascadeType.ALL})
-    private Account destination;
+
+    @NotNull
+    @Size(max = 64)
+    @Column(name = "SOURCE_ID", length = 64)
+    private String sourceId;
+
+    @NotNull
+    @Size(max = 64)
+    @Column(name = "DESTINATION_ID", length = 64)
+    private String destinationId;
+
+    public Payment() {
+
+    }
+
+    public Payment(String sourceId, String destinationId, BigDecimal amount) {
+        id = UUID.randomUUID().toString().replace("-", "");
+        createdAt = Calendar.getInstance().getTime();
+        this.destinationId = destinationId;
+        this.sourceId = sourceId;
+        this.amount = amount;
+    }
 
     public String getId() {
         return id;
@@ -56,26 +78,25 @@ public class Payment implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public Account getSource() {
-        return source;
+    public String getSourceId() {
+        return sourceId;
     }
 
-    public void setSource(Account source) {
-        this.source = source;
+    public void setSourceId(String sourceId) {
+        this.sourceId = sourceId;
     }
 
-    public Account getDestination() {
-        return destination;
+    public String getDestinationId() {
+        return destinationId;
     }
 
-    public void setDestination(Account destination) {
-        this.destination = destination;
+    public void setDestinationId(String destinationId) {
+        this.destinationId = destinationId;
     }
 
     @Override
     public String toString() {
-        return "Payment{" + "id=" + id + ", amount=" + amount + ", createdAt=" + createdAt + ", source=" + source + ", destination=" + destination + '}';
+        return "Payment{" + "id=" + id + ", amount=" + amount + ", createdAt=" + createdAt + ", sourceId=" + sourceId + ", destinationId=" + destinationId + '}';
     }
-    
-    
+
 }
