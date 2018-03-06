@@ -1,5 +1,6 @@
 package com.groundZero.settlementChamber.model;
 
+@Deprecated
 public class Greeting {
 
     private final Long id;
