@@ -3,44 +3,47 @@ package com.groundZero.settlementChamber.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-//@Entity
-//@Table(name = "GZ_ACCOUNT")
+@Entity
+@Table(name = "GZ_ACCOUNT")
 public class Account implements Serializable {
-    
-    public enum Type {
-        IN, OUT, TAX, PROFIT, GAME, DEPOSIT
-    }
+
+    public static final String TAX = "-: TAX";
+    public static final String ROYALTY = "-: ROYALTY";
     
     @Id
-    @NotNull    
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
+
+    @NotNull
+    @Digits(fraction = 2, integer = 10)
     private BigDecimal rest;
-    private Type type;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
+    @Column(name = "CREATED_AT")
     private Date createdAt;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
+    @Column(name = "LAST_CHANGED_AT")
     private Date lastChangedAt;
+
+    @NotNull
+    @Size(max = 64)
+    private String login;
     
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Owner.class, cascade = {CascadeType.ALL})
-    private Owner owner;
-    
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Payment.class, cascade = {CascadeType.ALL})
-    private List<Payment> payments;
+    @NotNull
+    @Size(max = 32)
+    private String password;
 
     public String getId() {
         return id;
@@ -56,14 +59,6 @@ public class Account implements Serializable {
 
     public void setRest(BigDecimal rest) {
         this.rest = rest;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
     }
 
     public Date getCreatedAt() {
@@ -82,26 +77,25 @@ public class Account implements Serializable {
         this.lastChangedAt = lastChangedAt;
     }
 
-    public Owner getOwner() {
-        return owner;
+    public String getLogin() {
+        return login;
     }
 
-    public void setOwner(Owner owner) {
-        this.owner = owner;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public List<Payment> getPayments() {
-        return payments;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPayments(List<Payment> payments) {
-        this.payments = payments;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
-        return "Account{" + "id=" + id + ", rest=" + rest + ", type=" + type + ", createdAt=" + createdAt + ", lastChangedAt=" + lastChangedAt + ", owner=" + owner + ", payments=" + payments + '}';
-    }
-    
-    
+        return "Account{" + "id=" + id + ", rest=" + rest + ", createdAt=" + createdAt + ", lastChangedAt=" + lastChangedAt + ", login=" + login + ", password=" + password + '}';
+    }   
+
 }

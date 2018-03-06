@@ -20,8 +20,7 @@ import javax.validation.constraints.*;
 public class Payment implements Serializable {
 
     @Id
-//    @Size(max = 64)
-//    @Column(length = 64, name = "ID")
+    @Size(max = 64)
     private String id;
 
     @NotNull
