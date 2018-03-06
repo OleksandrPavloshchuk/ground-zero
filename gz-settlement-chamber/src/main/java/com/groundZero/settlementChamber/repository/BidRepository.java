@@ -1,8 +1,8 @@
 package com.groundZero.settlementChamber.repository;
 
-import com.groundZero.settlementChamber.model.Account;
+import com.groundZero.settlementChamber.model.Bid;
 import org.springframework.data.repository.CrudRepository;
 
-public interface AccountRepository extends CrudRepository<Account, String> {
+public interface BidRepository extends CrudRepository<Bid, String> {
 
 }

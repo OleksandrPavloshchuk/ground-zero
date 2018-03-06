@@ -17,9 +17,6 @@ import javax.validation.constraints.Size;
 @Table(name = "GZ_ACCOUNT")
 public class Account implements Serializable {
 
-    public static final String TAX = "-: TAX";
-    public static final String ROYALTY = "-: ROYALTY";
-    
     @Id
     private String id;
 
@@ -36,6 +33,12 @@ public class Account implements Serializable {
     @NotNull
     @Column(name = "LAST_CHANGED_AT")
     private Date lastChangedAt;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CLOSED_AT")
+    private Date closedAt;  
+    
+    private Boolean closed;
 
     @NotNull
     @Size(max = 64)
@@ -44,6 +47,10 @@ public class Account implements Serializable {
     @NotNull
     @Size(max = 32)
     private String password;
+    
+    @NotNull
+    @Column(name = "EXTERNAL_KEY")
+    private String externalKey;
 
     public String getId() {
         return id;
@@ -93,9 +100,33 @@ public class Account implements Serializable {
         this.password = password;
     }
 
+    public Date getClosedAt() {
+        return closedAt;
+    }
+
+    public void setClosedAt(Date closedAt) {
+        this.closedAt = closedAt;
+    }
+
+    public Boolean getClosed() {
+        return closed;
+    }
+
+    public void setClosed(Boolean closed) {
+        this.closed = closed;
+    }
+
+    public String getExternalKey() {
+        return externalKey;
+    }
+
+    public void setExternalKey(String externalKey) {
+        this.externalKey = externalKey;
+    }
+
     @Override
     public String toString() {
-        return "Account{" + "id=" + id + ", rest=" + rest + ", createdAt=" + createdAt + ", lastChangedAt=" + lastChangedAt + ", login=" + login + ", password=" + password + '}';
-    }   
-
+        return "Account{" + "id=" + id + ", rest=" + rest + ", createdAt=" + createdAt + ", lastChangedAt=" + lastChangedAt + ", closedAt=" + closedAt + ", closed=" + closed + ", login=" + login + ", password=" + password + ", externalKey=" + externalKey + '}';
+    }
+    
 }
